@@ -1,8 +1,8 @@
 
 CFLAGS=-Os -Wall -static 
 
-EXTROOT=/root/Code/zombieant/ext
-ZROOT=/root/Code/zombieant/zafsrv
+EXTROOT=/root/zombieant/ext
+ZROOT=/root/zombieant/zafsrv
 ZBUILD=$(ZROOT)/build
 ZSRC=$(ZROOT)/src
 ZEXSRC=$(ZROOT)/extsrc

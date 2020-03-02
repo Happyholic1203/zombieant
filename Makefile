@@ -1,6 +1,7 @@
 CC = gcc
 GO = go
 CFLAGS= -Wall -ggdb3 -O0
+ARCH = x64
 
 
 SRC = $(CURDIR)/src
@@ -45,7 +46,7 @@ libaslr:
 
 ### Mains
 main:
-	$(CC) $(CFLAGS) -static-libgcc -static-libstdc++ $(SRC)/main.c -o $(BIN)/main -include /root/Code/zombieant/ext/glibc_version_header/version_headers/force_link_glibc_2.17.h
+	$(CC) $(CFLAGS) -static-libgcc -static-libstdc++ $(SRC)/main.c -o $(BIN)/main -include ext/glibc_version_header/version_headers/$(ARCH)/force_link_glibc_2.17.h
 
 main_init:
 	$(CC) $(CFLAGS) $(SRC)/main_init.c -o $(BIN)/main_init
@@ -69,7 +70,7 @@ nomain:
 	$(CC) $(CFLAGS) -nostartfiles $(SRC)/nomain.c -o $(BIN)/nomain
 
 nomain_interp:
-	$(CC) $(CFLAGS) -shared -Wl,-e,fn_no_main $(SRC)/nomain_interp.c -o $(BIN)/nomain_interp
+	$(CC) $(CFLAGS) -fPIC -shared -Wl,-e,fn_no_main $(SRC)/nomain_interp.c -o $(BIN)/nomain_interp
 
 nomain_entry:
 	$(CC) $(CFLAGS) -nostartfiles -Wl,-e,__data_frame_e $(SRC)/nomain_entry.c -o $(BIN)/nomain_entry
